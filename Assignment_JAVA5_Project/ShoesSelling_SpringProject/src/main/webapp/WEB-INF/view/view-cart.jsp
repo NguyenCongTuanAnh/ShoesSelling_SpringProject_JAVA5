@@ -24,12 +24,12 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${sessionScope.shoeCart}" var="product" varStatus="position">
+                    <c:forEach items="${sessionScope.shoeCart}" var="cart" varStatus="position">
                         <tr>
                             <td>${position.index + 1}</td>
-                            <td>${product.value.productDetail.productCode}</td>
-                            <td>${product.value.productDetail.product.productName}</td>
-                            <td>${product.value.shoeQuaity} * ${product.value.productDetail.exportPrice} = ${product.value.shoeQuaity * product.value.productDetail.exportPrice}</td>
+                            <td>${cart.productDetail.product.productCode}</td>
+                            <td>${cart.productDetail.product.productName}</td>
+                            <td>${cart.shoeQuaity} * ${cart.productDetail.exportPrice} = ${cart.shoeQuaity * cart.productDetail.exportPrice}</td>
                             <td>
                                 <a class="btn btn-success" href="#"
                                    onclick="thongBao()">Test</a>

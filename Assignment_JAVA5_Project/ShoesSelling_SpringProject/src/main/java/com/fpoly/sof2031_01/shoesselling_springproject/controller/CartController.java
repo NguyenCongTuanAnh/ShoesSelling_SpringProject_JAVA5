@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,31 +28,62 @@ public class CartController {
     @GetMapping ("/addCart/{id}")
     public String addShoeToCart(HttpSession session, @PathVariable(name = "id") String productID ,Model model){
 
-        HashMap<UUID, Cart> cartItems = (HashMap<UUID, Cart>) session.getAttribute("shoeCart");
-        if (cartItems == null){
-            cartItems = new HashMap<>();
-        }
+//        List<Cart> cartList =  session.getAttribute("shoeCart");
 
-        ProductDetail product = this.productDetailRepository.getById(UUID.fromString(productID));
-        System.out.println(product.toString());
-        if (product != null){
-            if(cartItems.containsKey(productID)){
-                Cart item = cartItems.get(productID);
-                item.setProductDetail(product);
-                item.setShoeQuaity(item.getShoeQuaity() + 1);
-                cartItems.put(UUID.fromString(productID), item);
-            }else{
-                Cart cart = new Cart();
-                cart.setProductDetail(product);
-                cart.setShoeQuaity(1);
+        if (session.getAttribute("shoeCart")==null){
+            List<Cart> cartList =  new ArrayList<Cart>();
+            cartList.add(new Cart(this.productDetailRepository.getById(UUID.fromString(productID)),1));
+            session.setAttribute("shoeCart", cartList);
+        }else {
+            List<Cart> cartList = (List<Cart>) session.getAttribute("shoeCart");
+
+            int index = this.exists(productID,cartList);
+            if (index == -1){
+                cartList.add(new Cart(productDetailRepository.getById(UUID.fromString(productID)),1));
+            }else {
+                int quantity = cartList.get(index).getShoeQuaity() + 1;
+                cartList.get(index).setShoeQuaity(quantity);
             }
-
-            session.setAttribute("cartItems", cartItems);
-            session.setAttribute("myCartTotal", totalPrice(cartItems));
-
+            session.setAttribute("shoeCart", cartList);
         }
 
-        return "/view";
+
+        return "view-cart";
+
+
+//        HashMap<UUID, Cart> cartItems = (HashMap<UUID, Cart>) session.getAttribute("shoeCart");
+//        if (cartItems == null){
+//            cartItems = new HashMap<>();
+//        }
+//
+//        ProductDetail product = this.productDetailRepository.getById(UUID.fromString(productID));
+//        System.out.println(product.toString());
+//        if (product != null){
+//            if(cartItems.containsKey(productID)){
+//                Cart item = cartItems.get(productID);
+//                item.setProductDetail(product);
+//                item.setShoeQuaity(item.getShoeQuaity() + 1);
+//                cartItems.put(UUID.fromString(productID), item);
+//            }else{
+//                Cart cart = new Cart();
+//                cart.setProductDetail(product);
+//                cart.setShoeQuaity(1);
+//            }
+//
+//            session.setAttribute("cartItems", cartItems);
+//            session.setAttribute("myCartTotal", totalPrice(cartItems));
+//
+//        }
+
+//        return "/view";
+    }
+    private int exists(String id, List<Cart> cart) {
+        for (int i = 0; i < cart.size(); i++) {
+            if (cart.get(i).getProductDetail().getProductDetailID().toString().equalsIgnoreCase(id)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
 
