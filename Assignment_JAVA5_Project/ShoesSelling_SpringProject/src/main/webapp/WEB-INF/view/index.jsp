@@ -61,7 +61,7 @@
                             <td>${product.product.productName}</td>
                             <td>${product.convertVNDToCurrencyFormat(product.exportPrice)}</td>
                             <td>
-                                <a class="btn btn-success" href="/addCart/${product.productDetailID}" onclick="alert("Thêm Vào giỏ hàng thành công!!!!")">Add to Cart</a>
+                                <a class="btn btn-success" href="/addCart/${product.productDetailID}" onclick="thongBao()">Add to Cart</a>
 
                             </td>
                         </tr>
@@ -74,4 +74,9 @@
 </div>
 <footer><p style="text-align: center;">HangNT169</p></footer>
 </body>
+<script>
+    function thongBao(){
+        return alert("Them Thanh Cong!!");
+    }
+</script>
 </html>

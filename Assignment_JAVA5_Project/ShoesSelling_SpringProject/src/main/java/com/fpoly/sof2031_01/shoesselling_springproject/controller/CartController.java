@@ -6,12 +6,15 @@ import com.fpoly.sof2031_01.shoesselling_springproject.repository.ProductDetailR
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -20,10 +23,10 @@ public class CartController {
     @Autowired
     private ProductDetailRepository productDetailRepository;
     @GetMapping ("/addCart/{id}")
-    public String addShoeToCart(HttpSession session, @PathVariable(name = "id") String productID){
+    public String addShoeToCart(HttpSession session, @PathVariable(name = "id") String productID ,Model model){
 
         HashMap<UUID, Cart> cartItems = (HashMap<UUID, Cart>) session.getAttribute("shoeCart");
-        if (cartItems.isEmpty()){
+        if (cartItems == null){
             cartItems = new HashMap<>();
         }
 
@@ -46,8 +49,9 @@ public class CartController {
 
         }
 
-        return "view-cart";
+        return "/view";
     }
+
 
     public double totalPrice(HashMap<UUID, Cart> cartItems){
         double count =0;
