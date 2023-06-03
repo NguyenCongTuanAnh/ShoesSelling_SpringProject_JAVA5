@@ -3,7 +3,6 @@ package com.fpoly.sof2031_01.shoesselling_springproject.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -26,7 +25,7 @@ import java.util.UUID;
 @Table(name = "people_type")
 public class PeopleType {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "UUID")
     @Column(name = "peopletype_id")
     private UUID peopleTypeID;
     @Column(name = "peopletype_name")

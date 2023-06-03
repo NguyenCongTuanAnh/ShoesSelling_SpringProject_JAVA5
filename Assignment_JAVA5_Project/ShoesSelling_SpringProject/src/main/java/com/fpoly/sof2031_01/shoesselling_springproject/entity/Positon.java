@@ -1,6 +1,5 @@
 package com.fpoly.sof2031_01.shoesselling_springproject.entity;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,16 +22,16 @@ import java.util.UUID;
 @Builder
 
 @Entity
-@Table(name = "brands")
-public class Brand {
-    @Column(name = "brands_id")
+@Table(name = "positions")
+public class Positon {
     @Id
     @GeneratedValue(generator = "UUID")
-    private UUID brandId;
-
-    @Column(name = "brands_code")
-    private String brandCode;
-
-    @Column(name = "brands_name")
-    private String brandsName;
+    @Column(name = "position_id")
+    private UUID positionID;
+    @Column(name = "position_code")
+    private String positionCode;
+    @Column(name = "position_name")
+    private String positionName;
+    @Column(name = "position_status")
+    private int positionStatus;
 }

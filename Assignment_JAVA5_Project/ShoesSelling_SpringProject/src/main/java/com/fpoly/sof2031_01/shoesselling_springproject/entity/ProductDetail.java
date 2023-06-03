@@ -3,7 +3,6 @@ package com.fpoly.sof2031_01.shoesselling_springproject.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -15,6 +14,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.text.DecimalFormat;
 import java.util.UUID;
 
 @Getter
@@ -28,7 +28,7 @@ import java.util.UUID;
 @Table(name = "product_details")
 public class ProductDetail {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "UUID")
     @Column(name = "productdetails_id")
     private UUID productDetailID;
 
@@ -92,4 +92,21 @@ public class ProductDetail {
     private String image;
     @Column(name = "productdetails_status")
     private String productdetailsStatus;
+
+
+    public String convertVNDToCurrencyFormat(double vnd) {
+        // Format VND with decimal separator dot
+        DecimalFormat formatter = new DecimalFormat("#,###.##");
+        String formattedVND = formatter.format(vnd);
+
+        // Replace dot with comma
+        formattedVND = formattedVND.replace(".", ",");
+
+        // Append "đ" character to the end
+        formattedVND += " đ";
+
+        return formattedVND;
+    }
+
+
 }
