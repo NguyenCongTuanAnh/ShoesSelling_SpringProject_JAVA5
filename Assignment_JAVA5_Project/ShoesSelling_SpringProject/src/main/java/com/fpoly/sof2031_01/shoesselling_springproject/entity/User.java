@@ -22,12 +22,21 @@ import java.util.UUID;
 @Builder
 
 @Entity
-@Table(name = "sizes")
-public class Size {
+@Table(name = "user")
+public class User {
+
     @Id
     @GeneratedValue(generator = "UUID")
-    @Column(name = "sizes_id")
-    private UUID sizeID;
-    @Column(name = "sizes_number")
-    private int size;
+    @Column(name = "ID")
+    private UUID ID;
+    @Column(name = "users_name")
+    private String usersName;
+    @Column(name = "phone_number")
+    private String phoneNumber;
+    @Column(name = "password")
+    private String password;
+    @Column(name = "role")
+    private String role;
+    @Column(name = "enable")
+    private int enable;
 }

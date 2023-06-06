@@ -14,9 +14,13 @@ import com.fpoly.sof2031_01.shoesselling_springproject.repository.SoleRepository
 import com.fpoly.sof2031_01.shoesselling_springproject.repository.TerrainTypeRepository;
 import com.fpoly.sof2031_01.shoesselling_springproject.repository.WeatherTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -50,16 +54,22 @@ public class ProductDetailController {
     @Autowired
     private WeatherTypeRepository weatherTypeRepository;
 
-    @GetMapping("/view")
-    @ResponseBody
-    public List<ProductDetail> viewMethod(Model model){
-//        model.addAttribute("productDetailsList", this.productDetailRepository.findAll() );
-       return  productDetailRepository.findAll();
-    }
+//    @GetMapping("/view")
+//    @ResponseBody
+//    public List<ProductDetail> viewMethod(Model model){
+////        model.addAttribute("productDetailsList", this.productDetailRepository.findAll() );
+//       return  productDetailRepository.findAll();
+//    }
 
-    @GetMapping("/getAll")
-    public String indexMethod(Model model){
-        model.addAttribute("productDetailsList", this.productDetailRepository.findAll() );
+    @GetMapping("/index")
+    public String indexMethod(Model model,
+                              @RequestParam(name = "page", defaultValue = "0") Integer pageNum
+
+    ){
+
+        Pageable pageable = PageRequest.of(pageNum, 6);
+        Page<ProductDetail> productDetailPage = productDetailRepository.findAll(pageable);
+        model.addAttribute("productDetailsList", productDetailPage);
 
         return "index";
     }

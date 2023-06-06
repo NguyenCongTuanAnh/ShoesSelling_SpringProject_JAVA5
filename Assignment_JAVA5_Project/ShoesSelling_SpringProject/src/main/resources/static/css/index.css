@@ -1,0 +1,13 @@
+
+.container{
+    background-color: black;
+}
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.input-group-append {
+    cursor: pointer;
+}

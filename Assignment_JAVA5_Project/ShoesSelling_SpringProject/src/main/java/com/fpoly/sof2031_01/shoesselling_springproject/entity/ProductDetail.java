@@ -33,6 +33,9 @@ public class ProductDetail {
     private UUID productDetailID;
 
     @ManyToOne
+    @JoinColumn(name = "material_id", referencedColumnName = "material_id")
+    private Material material;
+    @ManyToOne
     @JoinColumn(name = "products_id", referencedColumnName = "products_id")
     private Product product;
 
@@ -103,7 +106,7 @@ public class ProductDetail {
         formattedVND = formattedVND.replace(".", ",");
 
         // Append "đ" character to the end
-        formattedVND += " đ";
+        formattedVND += " VNĐ";
 
         return formattedVND;
     }

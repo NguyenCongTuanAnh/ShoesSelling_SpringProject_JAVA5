@@ -15,7 +15,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.math.BigDecimal;
 import java.sql.Date;
+import java.text.DecimalFormat;
 import java.util.UUID;
 
 @Getter
@@ -43,22 +45,46 @@ public class Orders {
     @Column(name = "orders_code")
     private String ordersCode;
 
-    @Column(name = "employees_createddate")
-    private Date employeesCreateddate;
-    @Column(name = "employees_paymentdate")
-    private Date employeesPaymentdate;
-    @Column(name = "employees_appointmentdate")
-    private Date employeesAppointmentdate;
-    @Column(name = "employees_shipdate")
-    private Date employeesShipdate;
-    @Column(name = "employees_receivedate")
-    private Date employeesReceivedate;
-    @Column(name = "employees_receivername")
-    private String employeesReceivername;
-    @Column(name = "employees_receiveraddress")
-    private String employeesReceiveraddress;
-    @Column(name = "employees_receiverphonenumber")
-    private String employeesReceiverphonenumber;
-    @Column(name = "employees_status")
-    private int employeesStatus;
+    @Column(name = "orders_createddate")
+    private Date createdDate;
+    @Column(name = "orders_paymentdate")
+    private Date paymentDate;
+    @Column(name = "orders_appointmentdate")
+    private Date appointmentDate;
+    @Column(name = "orders_shipdate")
+    private Date shipDate;
+    @Column(name = "orders_receivedate")
+    private Date receiveDate;
+    @Column(name = "orders_receivername")
+    private String receiverName;
+    @Column(name = "orders_receiveraddress")
+    private String receiverAddress;
+    @Column(name = "orders_receiverphonenumber")
+    private String receiverPhonenumber;
+    @Column(name = "orders_status")
+    private int orderStatus;
+    @Column(name = "total_order_price")
+    private BigDecimal totalOrderPrice;
+
+    public String toStringStatus(){
+        if (this.orderStatus == 1){
+            return "Đã Thanh Toán";
+        }else {
+            return "Chưa Thanh Toán";
+        }
+    }
+    public String convertVNDToCurrencyFormat(double vnd) {
+        // Format VND with decimal separator dot
+        DecimalFormat formatter = new DecimalFormat("#,###.##");
+        String formattedVND = formatter.format(vnd);
+
+        // Replace dot with comma
+        formattedVND = formattedVND.replace(".", ",");
+
+        // Append "đ" character to the end
+        formattedVND += " VNĐ";
+
+        return formattedVND;
+    }
 }
+

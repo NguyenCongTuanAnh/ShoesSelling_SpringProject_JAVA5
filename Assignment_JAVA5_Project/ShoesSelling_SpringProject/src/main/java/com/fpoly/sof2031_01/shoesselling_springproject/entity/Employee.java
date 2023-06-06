@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.sql.Date;
 import java.util.UUID;
 
 @Getter
@@ -47,7 +48,7 @@ public class Employee {
     @Column(name = "employees_gender")
     private boolean customersGender;
     @Column(name = "employees_birthday")
-    private boolean customersBirthday;
+    private Date customersBirthday;
     @Column(name = "employees_password")
     private boolean customersPassword;
     @Column(name = "employees_status")
