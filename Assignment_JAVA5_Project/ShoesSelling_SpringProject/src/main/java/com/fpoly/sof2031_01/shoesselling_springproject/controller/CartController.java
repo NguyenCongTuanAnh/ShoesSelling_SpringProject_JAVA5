@@ -1,9 +1,13 @@
 package com.fpoly.sof2031_01.shoesselling_springproject.controller;
 
 import com.fpoly.sof2031_01.shoesselling_springproject.entity.Cart;
+import com.fpoly.sof2031_01.shoesselling_springproject.entity.ProductDetail;
 import com.fpoly.sof2031_01.shoesselling_springproject.repository.ProductDetailRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,14 +45,20 @@ public class CartController {
                 cartList.get(index).setShoeQuaity(quantity);
             }
             session.setAttribute("shoeCart", cartList);
+            System.out.println("add shoeCart");
             session.setAttribute("cartSize", cartList.size());
+            System.out.println("add cartSize");
             session.setAttribute("totalCartProduct", totalCartProduct(cartList));
+            System.out.println("add totalCartProduct");
             session.setAttribute("cartTotalPrice", this.totalPrice(cartList));
+            System.out.println("add cartTotalPrice");
             session.setAttribute("cartTotalPriceString", convertVNDToCurrencyFormat(this.totalPrice(cartList)));
+            System.out.println("add cartTotalPriceString");
         }
 
-
-        model.addAttribute("productDetailsList", this.productDetailRepository.findAll() );
+        Pageable pageable = PageRequest.of(0, 6);
+        Page<ProductDetail> productDetailPage = productDetailRepository.findAll(pageable);
+        model.addAttribute("productDetailsList", productDetailPage);
         return "index";
     }
 

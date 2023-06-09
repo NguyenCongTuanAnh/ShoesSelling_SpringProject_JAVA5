@@ -99,7 +99,8 @@ public class OrderController {
             this.orderDetailRepository.save(orderDetail);
             System.out.println("Add Hoa Don Detail");
         }
-
+        session.invalidate();
+        System.out.println("Clear Session Successs");
         return "/dat-hang-thanh-cong";
     }
     @PostMapping("/addOrder")
@@ -160,6 +161,7 @@ public class OrderController {
             this.orderDetailRepository.save(orderDetail);
             System.out.println("Add Hoa Don Detail");
         }
+
 
         return "/dat-hang-thanh-cong";
     }

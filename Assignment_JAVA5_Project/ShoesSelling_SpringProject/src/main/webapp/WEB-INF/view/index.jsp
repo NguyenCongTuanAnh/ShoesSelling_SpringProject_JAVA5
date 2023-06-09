@@ -82,7 +82,7 @@
                 <i class="fa fa-fw fa-cart-arrow-down text-danger mr-1 fa-2x"></i>
                 <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>
             </a>
-            <a class="nav-icon position-relative text-decoration-none" href="#">
+            <a class="nav-icon position-relative text-decoration-none" href="/dashboard">
                 <i class="fa fa-fw fa-user text-danger mr-3 fa-2x"></i>
                 <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">Login</span>
             </a>

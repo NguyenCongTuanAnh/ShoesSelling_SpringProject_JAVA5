@@ -30,7 +30,7 @@
                         <select name="sizes" class="form-control" class="form-select"
                                 aria-label="Default select example">
                             <c:forEach items="${sizeLists}" var="size">
-                                <option value="${size.sizeID}">${size.sizeNumber}</option>
+                                <option value="${size.sizeID}">${size.size}</option>
                             </c:forEach>
                         </select>
                         <button class="btn btn-white"><a href=""><i class="fa fa-plus"></i></a></button>
@@ -72,7 +72,7 @@
                         <select name="sizes" class="form-control" class="form-select"
                                 aria-label="Default select example">
                             <c:forEach items="${sizeLists}" var="size">
-                                <option value="${size.sizeID}">${size.sizeNumber}</option>
+                                <option value="${size.sizeID}">${size.size}</option>
                             </c:forEach>
                         </select>
                         <button class="btn btn-white"><a href=""><i class="fa fa-plus"></i></a></button>
